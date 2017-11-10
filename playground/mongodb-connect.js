@@ -9,7 +9,7 @@ var {name} = user;
 console.log(name); */
 
 
-//MongDB connection
+//MongDB connection details
 const dbName = 'ToDoApp';
 const portNumber = '27017';
 const connectionStr =`mongodb://localhost:${portNumber}/${dbName}`; 
