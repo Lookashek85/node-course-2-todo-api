@@ -35,10 +35,10 @@ app.get('/todos/:id',(req,res)=>{
     if(!ObjectID.isValid(id)){
             return res.status(404).send();
          }
-         console.log('passed validation');
+        
     Todo.findById(id).then((todo)=>{
         if(todo){
-            console.log(todo);
+           // console.log(todo);
             res.send({todo});
         }
         else{

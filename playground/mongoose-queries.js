@@ -16,7 +16,7 @@ User.findOne({_id: id}).then((user) =>{
     if(!user){
         return console.log('User not found!');
     }
-    console.log('User ',user);
+    //console.log('User ',user);
 }, (e)=>{
     console.log(e);
 });
