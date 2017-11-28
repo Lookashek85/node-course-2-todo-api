@@ -25,6 +25,7 @@ app.listen(PORT_NUMBER, ()=>{
     console.log(`Listening on port ${PORT_NUMBER}`);
 });
 
+module.exports = {app};
 
 
 
