@@ -7,6 +7,7 @@ var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 
 var app = express();
+const PORT_NUMBER = process.env || 3000;
 
 app.use(bodyParser.json());
 
@@ -51,7 +52,7 @@ app.get('/todos/:id',(req,res)=>{
 
 
 //Server 
-const PORT_NUMBER = 3000;
+
 app.listen(PORT_NUMBER, ()=>{
     console.log(`Listening on port ${PORT_NUMBER}`);
 });
