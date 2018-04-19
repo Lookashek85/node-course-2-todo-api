@@ -13,8 +13,7 @@ var PORT_NUMBER = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
-
-
+ 
 app.post('/todos', (req, res) =>{
     var todo = new Todo({
         text: req.body.text
@@ -65,8 +64,8 @@ app.delete('/todos/:id', (req, res)=>{
         if(!todo){
             return res.status(404).send();
         }
-
-        res.send(tod);
+        console.log("Deleting ..." + todo.text)
+        res.send(todo);
     }).catch((e)=>{
         res.status(400).send();
     })
