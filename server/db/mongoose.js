@@ -1,21 +1,42 @@
 var mongoose = require('mongoose');
+const yargs = require('yargs');
+
 var properties = require('./../../config/propertiesLoader');
-
-// //MongDB remote connection details
-// const remoteLogin = 'Lukas'
-// const remotePwd = 'Lookashek85!';
-// const remoteDBHost = '@ds123796.mlab.com:23796';
-// const remoteDBName = 'udemycourses'
-// const remoteMongoDBconnectStr = `mongodb://${remoteLogin}:${remotePwd}${remoteDBHost}/${remoteDBName}`;
-// //Local connection details
-// const dbName = 'ToDoApp';
-// const portNumber = '27017';
-// const connectionString =`mongodb://localhost:${portNumber}/${dbName}`;
-
-var remoteConnString = properties.remoteConnectionString;
-var localConnString = properties.localConnectionString;
+var localConnectionStr = properties.localConnectionString;
+var remoteConnectionString = properties.remoteConnectionString;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(remoteConnString || localConnString, { useMongoClient: true });
 
-module.exports = {mongoose};
+
+    var connStr = localConnectionStr;
+    
+    if(yargs.argv.r){
+              connStr = remoteConnectionString;
+    }
+    
+    if(connStr === null){
+        throw new Error((e)=>{
+            console.log('No connection string defined! '+e);
+        });
+    } 
+     
+    mongoose.connect( connStr, { useMongoClient: true }).then(()=>{
+        //console.log(`connected to  == > ${connStr}` );
+
+    }).catch((e)=>{
+        console.log(e);
+    });
+    
+    /*
+  //  remoteConnectionString = null;
+    console.log(connStr + ' Loaded...');
+    if((yargs.argv.l && localConnectionStr) || (!remoteConnectionString && localConnectionStr)){
+        connStr = localConnectionStr;  
+       console.log(`Connected to local db host -> ${connStr}`);
+    }else if(remoteConnectionString) {
+        connStr = remoteConnectionString;
+        console.log(`Connected to remote db host -> ${connStr}`);
+    }
+     */
+ 
+module.exports = {mongoose,connStr};
