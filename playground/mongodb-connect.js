@@ -18,22 +18,11 @@ MongoClient.connect(connectionStr,(err,db)=>{
     if(err){
         return console.log('Unable to connect to mongoDB server');//using return to prevent further execution of program in case of error
     }
-    console.log(`Connected to ${connectionStr}`);
+    console.log(`Connected to ${connectionStr} from localhost`);
 
-    // db.collection('Todos').insertOne({
-    //     text: 'Something to do',
-    //     completed: false
-    // }, (err, result)=>{
-    //     if(err){
-    //         return console.log('Unable to insero todo', err);
-    //     }
-    //     console.log(JSON.stringify(result.ops, undefined, 2));
-    // });
 
-    db.collection('Users').insertOne({
-        name: 'Lukas',
-        age: 31,
-        location: 'Belfast'
+    db.collection('Todos').insertOne({
+        text : "Cook dinner"
     }, (err, result)=>{
         if(err){
             return console.log('Unable to insert user', err);
